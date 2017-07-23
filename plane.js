@@ -39,3 +39,5 @@ function drawPlano(){
     ctx.font = "20px Verdana";
     ctx.fillText("Eixo Z",20,(canvasHeight)-5);
 }
+
+drawPlano();
