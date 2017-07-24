@@ -202,11 +202,11 @@ function cube_down(cube){
 	fakeCube.top3 = [cube.top3[0]-cube.cubex*2.5, cube.top3[1]-nov];
 
 
-	fakeCube.base2 = [cube.base2[0]-cube.cubex, cube.base2[1]];
 
 
 
-	fakeCube.base3 = [cube.base3[0], cube.base3[1]];
+
+	//fakeCube.base3 = [cube.base3[0], cube.base3[1]];
 
 
 
@@ -225,6 +225,7 @@ function cube_down(cube){
 
 
 //TOP 2 ROTACIONADO COM SUCESSO
+	ctx.fillRect(fakeCube.base2[0],fakeCube.base2[1],5,5);
 	res = turnAnti(90,fakeCube.top2[0],fakeCube.top2[1]);//girar 1/4 pra esquerda
 	fakeCube.top2[0] = res[0];
 	fakeCube.top2[1] = res[1];
@@ -235,9 +236,9 @@ function cube_down(cube){
 	fakeCube.top3[1] = res[1];
 /*
 //BASE2 ROTACIONADO COM SUCESSO
-	res = turn(rot,fakeCube.base2[0],fakeCube.base2[1]);
-	fakeCube.top1[0] = res[0];
-	fakeCube.top1[1] = res[1];
+	res = turn(90,fakeCube.base2[0],fakeCube.base2[1]);
+	fakeCube.base2[0] = res[0];
+	fakeCube.base2[1] = res[1];
 
 //BASE 3 ROTACIONADO COM SUCESSO
 	res = turn(rot,fakeCube.base3[0],fakeCube.base3[1]);
@@ -257,20 +258,31 @@ function cube_down(cube){
 	fakeCube.top2 = [cube.top2[0]+(cube.cubex*1.5), cube.top2[1]+nov];//SUBTRAIR NO Y É SOMAR
 	fakeCube.top3 = [cube.top3[0]+cube.cubex*2.5, cube.top3[1]+nov];
 
-	fakeCube.base2 = [cube.base2[0], cube.base2[1]];
-	fakeCube.base3 = [cube.base3[0], cube.base3[1]];
+
+	//fakeCube.base3 = [cube.base3[0], cube.base3[1]];
+	//fakeCube.base2 = [cube.base2[0]-cube.cubex, cube.base2[1]]; PONTO A SER ROTACIONADO
 
 
 
 
-	ctx.fillRect(fakeCube.top0[0],fakeCube.top0[1]-fakeCube.size,200,1);
-	ctx.fillRect(fakeCube.top2[0]+fakeCube.size/2,fakeCube.top0[1]-fakeCube.size*1.5,2,2);
-	ctx.fillRect(fakeCube.top2[0]+fakeCube.size/2,fakeCube.top0[1]-fakeCube.size*0.5,2,2);
+
+
+
+
+	ctx.fillStyle="orange";
+	ctx.fillRect(fakeCube.top2[0]+fakeCube.size/2,fakeCube.top0[1]-fakeCube.size*1.5,3,3);//ponto para ir em direçao a zero
+	ctx.fillStyle="blue";
+	ctx.fillRect(fakeCube.top2[0]+fakeCube.size/2,fakeCube.top0[1]-fakeCube.size*0.5,3,3);//PONTO FINAL
+	//ctx.fillRect(fakeCube.top0[0],fakeCube.top0[1]-fakeCube.size,200,1);
+
+
+
 	fakeCube.draw();
 }
 
 cube = new Cube(100,100,300,0,"blue");
 cube_down(cube);
 cubeb = new Cube(100,100,300,0,"green");
+cubeb.draw();
 
 
