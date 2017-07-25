@@ -5,110 +5,68 @@ var canvasH = 600;
 centerH = canvasHeight/2;
 centerW = canvasWidth/2;
 
-function Cube(size,cubex,cubey,cubez,color) {
+function Cube(size,cubex,cubey) {
 	this.size = size;
+	this.halfSize = size/2;
+	this.quartSize = size/4
 	this.cubex = cubex;
 	this.cubey = cubey;
-	this.cubez = cubez;
-	this.color = color;
 
 
-	this.base0 = [  cubex,
-			cubey,
-			cubez
-		     ];
+	//QUADRADO VIRADO PARA BAIXO
+	this.base0 = [0, 0];
+	this.base1 = [size, 0];
+	this.top0 = [0, size*-1];
+	this.top1 = [size, size*-1];
+	
+	this.base2 = [this.halfSize,(this.halfSize)*-1];
+	this.base3 = [(this.size+this.halfSize), (this.halfSize)*-1];
+	this.top2 = [this.halfSize,(this.size+this.halfSize)*-1];
+	this.top3 = [(this.size+this.halfSize), (this.size+this.halfSize)*-1];
+	
 
-	this.base1 = [  cubex+size,
-			cubey,
-			cubez
-		     ];
-
-	this.top0 = [  cubex,
-			this.base0[1]-size,
-			cubez
-		     ];
-
-	this.top1 = [  cubex+size,
-			this.base1[1]-size,
-			cubez
-		     ];
-
-
-	this.base2 = [  cubex+(size/2),
-			cubey-(size/2),
-			cubez
-		     ];
-
-	this.base3 = [  this.base2[0]+size,
-			cubey-(size/2),
-			cubez
-		     ];
-
-	this.top2 = [  cubex+(size/2),
-			this.base2[1]-size,
-			cubez
-		     ];
-
-	this.top3 = [  this.top2[0]+size,
-			this.base3[1]-size,
-			cubez
-		     ];
 
 	this.draw = function(){
-			/*
-		2	3
+		ctx.strokeStyle = "red";
+		ctx.beginPath();
+		ctx.moveTo(this.base0[0]+cubex, this.base0[1]+cubey);
+		ctx.lineTo(this.base1[0]+cubex, this.base1[1]+cubey);
+		ctx.lineTo(this.top1[0]+cubex, this.top1[1]+cubey);
+		ctx.lineTo(this.top0[0]+cubex, this.top0[1]+cubey);
+		ctx.lineTo(this.base0[0]+cubex, this.base0[1]+cubey);
+		ctx.stroke();
 
-		0	1	
-		*/
-		ctx.strokeStyle = color;
+		ctx.strokeStyle = "blue";
+		ctx.beginPath();
+		ctx.moveTo(this.base2[0]+cubex, this.base2[1]+cubey);
+		ctx.lineTo(this.base3[0]+cubex, this.base3[1]+cubey);
+		ctx.lineTo(this.top3[0]+cubex, this.top3[1]+cubey);
+		ctx.lineTo(this.top2[0]+cubex, this.top2[1]+cubey);
+		ctx.lineTo(this.base2[0]+cubex, this.base2[1]+cubey);
+		ctx.stroke();
+
+
+		ctx.strokeStyle = "purple";
 		ctx.beginPath();
 
-
-		ctx.moveTo(this.base0[0], this.base0[1]);
-		ctx.lineTo(this.base1[0], this.base1[1]);
-		ctx.lineTo(this.base3[0], this.base3[1]);
-		ctx.lineTo(this.base2[0], this.base2[1]);
-		ctx.lineTo(this.base0[0], this.base0[1]);
+		ctx.moveTo(this.base0[0]+cubex, this.base0[1]+cubey);
+		ctx.lineTo(this.base2[0]+cubex, this.base2[1]+cubey);
 		ctx.stroke();
 
-		ctx.moveTo(this.top0[0], this.top0[1]);
-		ctx.lineTo(this.top1[0], this.top1[1]);
-		ctx.lineTo(this.top3[0], this.top3[1]);
-		ctx.lineTo(this.top2[0], this.top2[1]);
-		ctx.lineTo(this.top0[0], this.top0[1]);
+		ctx.moveTo(this.base1[0]+cubex, this.base1[1]+cubey);
+		ctx.lineTo(this.base3[0]+cubex, this.base3[1]+cubey);
 		ctx.stroke();
 
-		ctx.moveTo(this.base0[0], this.base0[1]);
-		ctx.lineTo(this.top0[0], this.top0[1]);
-		ctx.stroke();
-		ctx.moveTo(this.base1[0], this.base1[1]);
-		ctx.lineTo(this.top1[0], this.top1[1]);
+		ctx.moveTo(this.top0[0]+cubex, this.top0[1]+cubey);
+		ctx.lineTo(this.top2[0]+cubex, this.top2[1]+cubey);
 		ctx.stroke();
 
-		ctx.moveTo(this.base2[0], this.base2[1]);
-		ctx.lineTo(this.top2[0], this.top2[1]);
+		ctx.moveTo(this.top1[0]+cubex, this.top1[1]+cubey);
+		ctx.lineTo(this.top3[0]+cubex, this.top3[1]+cubey);
 		ctx.stroke();
-		ctx.moveTo(this.base3[0], this.base3[1]);
-		ctx.lineTo(this.top3[0], this.top3[1]);
-		ctx.stroke();
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function turnAnti(angle,x,y){
 		var rotationMatrix = [Math.cos(angle * Math.PI / 180.0),
@@ -147,48 +105,7 @@ function turn(angle,x,y){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function cube_down(cube){
-
-	var fakeCube = cube;
+/*
 
 //BASE 0 e 1 NÃO ROTACIONA
 	fakeCube.base0 = [cube.base0[0]-cube.cubex, cube.base0[1]-cube.cubey];
@@ -247,20 +164,6 @@ function cube_down(cube){
 
 */
 
-	ctx.fillStyle="red";
-
-	fakeCube.base0 = [cube.base0[0]+cube.cubex, cube.base0[1]+cube.cubey];
-	fakeCube.base1 = [cube.base1[0]+cube.cubex, cube.base1[1]+cube.cubey];
-
-	fakeCube.top0 = [cube.top0[0]+cube.cubex, cube.top0[1]+cube.cubey];
-	fakeCube.top1 = [cube.top1[0]+cube.cubex*2, cube.top1[1]+cube.cubey];
-
-	fakeCube.top2 = [cube.top2[0]+(cube.cubex*1.5), cube.top2[1]+nov];//SUBTRAIR NO Y É SOMAR
-	fakeCube.top3 = [cube.top3[0]+cube.cubex*2.5, cube.top3[1]+nov];
-
-
-	//fakeCube.base3 = [cube.base3[0], cube.base3[1]];
-	//fakeCube.base2 = [cube.base2[0]-cube.cubex, cube.base2[1]]; PONTO A SER ROTACIONADO
 
 
 
@@ -269,20 +172,44 @@ function cube_down(cube){
 
 
 
-	ctx.fillStyle="orange";
-	ctx.fillRect(fakeCube.top2[0]+fakeCube.size/2,fakeCube.top0[1]-fakeCube.size*1.5,3,3);//ponto para ir em direçao a zero
-	ctx.fillStyle="blue";
-	ctx.fillRect(fakeCube.top2[0]+fakeCube.size/2,fakeCube.top0[1]-fakeCube.size*0.5,3,3);//PONTO FINAL
-	//ctx.fillRect(fakeCube.top0[0],fakeCube.top0[1]-fakeCube.size,200,1);
 
 
 
-	fakeCube.draw();
-}
 
-cube = new Cube(100,100,300,0,"blue");
-cube_down(cube);
-cubeb = new Cube(100,100,300,0,"green");
-cubeb.draw();
+
+cube = new Cube(100,0,0);
+fakeCube = new Cube(100,250,300);
+//TOP 0 ROTACIONADO
+	res = turnAnti(135,fakeCube.top0[0],fakeCube.top0[1]);
+	fakeCube.top0[0] = res[0];
+	fakeCube.top0[1] = res[1];
+
+//TOP 1 ROTACIONADO
+	res = turnAnti(135,fakeCube.top1[0]-fakeCube.size, fakeCube.top1[1]);
+	fakeCube.top1[0] = res[0]+fakeCube.size;
+	fakeCube.top1[1] = res[1];
+
+//TOP 2 ROTACIONADO
+/*	res = turnAnti(90,fakeCube.top2[0]-fakeCube.halfSize, fakeCube.top2[1]+35);
+	console.log(res);
+
+	fakeCube.top2[0] = res[0]+fakeCube.halfSize;
+	fakeCube.top2[1] = res[1]-35;
+*/
+
+
+
+ctx.fillRect(fakeCube.top0[0]+fakeCube.cubex,fakeCube.top0[0]+fakeCube.cubey,300,2);
+
+//cube.draw();
+fakeCube.draw();
+
+
+
+
+
+
+
+
 
 
