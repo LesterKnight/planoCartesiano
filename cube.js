@@ -105,80 +105,10 @@ function turn(angle,x,y){
 
 
 
-/*
-
-//BASE 0 e 1 NÃO ROTACIONA
-	fakeCube.base0 = [cube.base0[0]-cube.cubex, cube.base0[1]-cube.cubey];
-	fakeCube.base1 = [cube.base1[0]-cube.cubex, cube.base1[1]-cube.cubey];
-//PUXA O VETOR PARA A COORDENADA X0 PARA CALCULAR SUA ROTAÇÃO
-	fakeCube.top0 = [cube.top0[0]-cube.cubex, cube.top0[1]-cube.cubey];
-	fakeCube.top1 = [cube.top1[0]-cube.cubex*2, cube.top1[1]-cube.cubey];
-//NAO ABSOLUTO
-	nov = cube.cubey-(cube.cubey/10);
-	fakeCube.top2 = [cube.top2[0]-cube.cubex*1.5, cube.top2[1]-nov];//SUBTRAIR NO EIXO Y É SOMAR
-	fakeCube.top3 = [cube.top3[0]-cube.cubex*2.5, cube.top3[1]-nov];
-
-
-
-
-
-
-	//fakeCube.base3 = [cube.base3[0], cube.base3[1]];
-
-
-
-
-//TOP 0 ROTACIONADO COM SUCESSO
-	res = turnAnti(135,fakeCube.top0[0],fakeCube.top0[1]);
-	fakeCube.top0[0] = res[0];
-	fakeCube.top0[1] = res[1];
-
-
-//TOP 1 ROTACIONADO COM SUCESSO
-	res = turnAnti(135,fakeCube.top1[0],fakeCube.top1[1]);
-	fakeCube.top1[0] = res[0];
-	fakeCube.top1[1] = res[1];
-
-
-
-//TOP 2 ROTACIONADO COM SUCESSO
-	ctx.fillRect(fakeCube.base2[0],fakeCube.base2[1],5,5);
-	res = turnAnti(90,fakeCube.top2[0],fakeCube.top2[1]);//girar 1/4 pra esquerda
-	fakeCube.top2[0] = res[0];
-	fakeCube.top2[1] = res[1];
-
-//TOP 3 ROTACIONADO COM SUCESSO
-	res = turnAnti(90,fakeCube.top3[0],fakeCube.top3[1]);
-	fakeCube.top3[0] = res[0];
-	fakeCube.top3[1] = res[1];
-/*
-//BASE2 ROTACIONADO COM SUCESSO
-	res = turn(90,fakeCube.base2[0],fakeCube.base2[1]);
-	fakeCube.base2[0] = res[0];
-	fakeCube.base2[1] = res[1];
-
-//BASE 3 ROTACIONADO COM SUCESSO
-	res = turn(rot,fakeCube.base3[0],fakeCube.base3[1]);
-	fakeCube.top1[0] = res[0];
-	fakeCube.top1[1] = res[1];
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 cube = new Cube(100,0,0);
-fakeCube = new Cube(100,250,300);
+fakeCube = new Cube(100,300,300);
+/*
 //TOP 0 ROTACIONADO
 	res = turnAnti(135,fakeCube.top0[0],fakeCube.top0[1]);
 	fakeCube.top0[0] = res[0];
@@ -190,7 +120,7 @@ fakeCube = new Cube(100,250,300);
 	fakeCube.top1[1] = res[1];
 
 //TOP 2 ROTACIONADO
-/*	res = turnAnti(90,fakeCube.top2[0]-fakeCube.halfSize, fakeCube.top2[1]+35);
+	res = turnAnti(90,fakeCube.top2[0]-fakeCube.halfSize, fakeCube.top2[1]+35);
 	console.log(res);
 
 	fakeCube.top2[0] = res[0]+fakeCube.halfSize;
@@ -199,7 +129,7 @@ fakeCube = new Cube(100,250,300);
 
 
 
-ctx.fillRect(fakeCube.top0[0]+fakeCube.cubex,fakeCube.top0[0]+fakeCube.cubey,300,2);
+ctx.fillRect(0,350,600,2);
 
 //cube.draw();
 fakeCube.draw();
