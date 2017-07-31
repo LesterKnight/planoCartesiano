@@ -14,8 +14,8 @@ function drawPlano(){
     ctx.lineTo(canvasWidth, centerHeight);
     ctx.stroke();
 
-    ctx.font = "20px Verdana";
-    ctx.fillText("Eixo X",10,(centerHeight)-5);
+    //ctx.font = "20px Verdana";
+    //ctx.fillText("Eixo X",10,(centerHeight)-5);
 
 
 //Y AXIS
@@ -25,8 +25,8 @@ function drawPlano(){
     ctx.lineTo(centerWidth, canvasHeight);
     ctx.stroke();
 
-    ctx.font = "20px Verdana";
-    ctx.fillText("Eixo Y",centerWidth +5,15);
+    //ctx.font = "20px Verdana";
+    //ctx.fillText("Eixo Y",centerWidth +5,15);
 
 //Z AXIS
 
@@ -36,8 +36,9 @@ function drawPlano(){
     ctx.lineTo(canvasWidth, 0);
     ctx.stroke();
 
-    ctx.font = "20px Verdana";
-    ctx.fillText("Eixo Z",20,(canvasHeight)-5);
+    //ctx.font = "20px Verdana";
+    //ctx.fillText("Eixo Z",20,(canvasHeight)-5);
 }
 
 drawPlano();
+

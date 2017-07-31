@@ -11,18 +11,25 @@ function Cube(size,cubex,cubey) {
 	this.quartSize = size/4
 	this.cubex = cubex;
 	this.cubey = cubey;
-
-
-	//QUADRADO VIRADO PARA BAIXO
-	this.base0 = [0, 0];
-	this.base1 = [size, 0];
-	this.top0 = [0, size*-1];
-	this.top1 = [size, size*-1];
 	
-	this.base2 = [this.halfSize,(this.halfSize)*-1];
-	this.base3 = [(this.size+this.halfSize), (this.halfSize)*-1];
-	this.top2 = [this.halfSize,(this.size+this.halfSize)*-1];
-	this.top3 = [(this.size+this.halfSize), (this.size+this.halfSize)*-1];
+	//calcula 1 no EIXO Z
+	//a²=b²+c²
+	this.eixo_x = Math.pow(1, 2);//b²
+	this.eixo_y = Math.pow(1, 2);//c²
+	this.eixo_z = Math.sqrt(this.eixo_x + this.eixo_y);//a² é a diagonal inteira do quadrado, dividindo ao meio temos a relação de Z com A e B
+	this.eixo_z /= 2;
+	this.diferenca = this.eixo_y - this.eixo_z;
+	
+	//QUADRADO VIRADO PARA BAIXO
+	this.base0 = [0, 0, 0];
+	this.base1 = [size, 0, 0];
+	this.top0 = [0, size*-1, 0];
+	this.top1 = [size, size*-1, 0];
+	//PARTE SUPERIOR
+	this.base2 = [this.halfSize,(this.halfSize)*-1, size*this.eixo_z];
+	this.base3 = [(this.size+this.halfSize), (this.halfSize)*-1, size*this.eixo_z];
+	this.top2 = [this.halfSize,(this.size+this.halfSize)*-1, size*this.eixo_z];
+	this.top3 = [(this.size+this.halfSize), (this.size+this.halfSize)*-1, size*this.eixo_z];
 	
 
 
@@ -66,6 +73,28 @@ function Cube(size,cubex,cubey) {
 		ctx.stroke();
 
 	}
+	
+	
+	
+	
+	this.printMedidas = function(){
+		console.log("base0:");
+		console.log(this.base0);
+		console.log("base1:");
+		console.log(this.base1);
+		console.log("top0:");
+		console.log(this.top0);
+		console.log("top1:");
+		console.log(this.top1);
+		console.log("base2:");
+		console.log(this.base2);
+		console.log("base3:");
+		console.log(this.base3);
+		console.log("top2:");
+		console.log(this.top2);
+		console.log("top3:");
+		console.log(this.top3);
+	}
 }
 
 function turnAnti(angle,x,y){
@@ -106,33 +135,74 @@ function turn(angle,x,y){
 
 
 
-cube = new Cube(100,0,0);
+cube = new Cube(100,300,300);
 fakeCube = new Cube(100,300,300);
+fakeCube2 = new Cube(100,250,350);
 /*
 //TOP 0 ROTACIONADO
-	res = turnAnti(135,fakeCube.top0[0],fakeCube.top0[1]);
-	fakeCube.top0[0] = res[0];
-	fakeCube.top0[1] = res[1];
-
-//TOP 1 ROTACIONADO
-	res = turnAnti(135,fakeCube.top1[0]-fakeCube.size, fakeCube.top1[1]);
-	fakeCube.top1[0] = res[0]+fakeCube.size;
-	fakeCube.top1[1] = res[1];
-
+	diferenca = (fakeCube.diferenca*fakeCube.size)/135;
+	
+	for (i=0;i<135;i++){
+		res = turnAnti(i,cube.top0[0],cube.top0[1]+(diferenca*i));
+		fakeCube.top0[0] = res[0];
+		fakeCube.top0[1] = res[1];
+		ctx.beginPath();
+		ctx.moveTo(fakeCube.base0[0]+fakeCube.cubex, fakeCube.base0[1]+fakeCube.cubey);
+		ctx.lineTo(res[0]+fakeCube.cubex, res[1]+fakeCube.cubey);
+		ctx.stroke();
+	}
+//TOP 1 ROTACIONADO	
+	for (i=0;i<135;i++){
+		res = turnAnti(i,cube.top1[0]-cube.size,cube.top1[1]+(diferenca*i));
+		fakeCube.top1[0] = res[0]+cube.size;
+		fakeCube.top1[1] = res[1];
+		
+		ctx.beginPath();
+		ctx.moveTo(fakeCube.base1[0]+fakeCube.cubex, fakeCube.base1[1]+fakeCube.cubey);
+		ctx.lineTo(res[0]+fakeCube.cubex+fakeCube.size, res[1]+fakeCube.cubey);
+		ctx.stroke();
+	}
 //TOP 2 ROTACIONADO
-	res = turnAnti(90,fakeCube.top2[0]-fakeCube.halfSize, fakeCube.top2[1]+35);
-	console.log(res);
+for (i=0;i<90;i++){
 
-	fakeCube.top2[0] = res[0]+fakeCube.halfSize;
-	fakeCube.top2[1] = res[1]-35;
+	res = turnAnti(i,cube.top2[0]-cube.halfSize, cube.top2[1]+cube.halfSize);
+	fakeCube.top2[0] = res[0]+cube.halfSize;
+	fakeCube.top2[1] = res[1]-cube.halfSize;
+	
+	ctx.beginPath();
+	ctx.moveTo(fakeCube.base2[0]+fakeCube.cubex, fakeCube.base2[1]+fakeCube.cubey);
+	ctx.lineTo(res[0]+cube.halfSize+cube.cubex,res[1]-cube.halfSize+cube.cubey);
+	ctx.stroke();
+}
+//TOP 3 ROTACIONADO
+for (i=0;i<90;i++){
+res = turnAnti(i,cube.top3[0]-cube.halfSize-cube.size, cube.top3[1]+cube.halfSize);
+	fakeCube.top2[0] = res[0]+cube.halfSize+cube.size;
+	fakeCube.top2[1] = res[1]-cube.halfSize;
+	
+	ctx.beginPath();
+	ctx.moveTo(fakeCube.base3[0]+fakeCube.cubex, fakeCube.base3[1]+fakeCube.cubey);
+	ctx.lineTo(res[0]+cube.halfSize+cube.size+cube.cubex,res[1]-cube.halfSize+cube.cubey);
+	ctx.stroke();
+}
+
+
+
 */
+//BASE3 ROTACIONADO
+	diferenca = (fakeCube.diferenca*fakeCube.size)/360;
+	
+	for (i=0;i<45;i++){
+		res = turnAnti(i,cube.base2[0],cube.base2[1]);//colocar o diferencial no vetor ou no resultado???
+		fakeCube.base2[0] = res[0];
+		fakeCube.base2[1] = res[1]-30;
+
+	}
 
 
-
-ctx.fillRect(0,350,600,2);
-
-//cube.draw();
 fakeCube.draw();
+cube.draw();
+//fakeCube.printMedidas();
 
 
 
