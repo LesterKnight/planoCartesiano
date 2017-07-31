@@ -190,12 +190,13 @@ res = turnAnti(i,cube.top3[0]-cube.halfSize-cube.size, cube.top3[1]+cube.halfSiz
 
 */
 //BASE3 ROTACIONADO
-	diferenca = (fakeCube.diferenca*fakeCube.size)/360;
-	
-	for (i=0;i<45;i++){
-		res = turnAnti(i,cube.base2[0],cube.base2[1]);//colocar o diferencial no vetor ou no resultado???
+	diferenca = (fakeCube.diferenca*fakeCube.size)/45;
+
+	for (i=0;i<359;i++){
+		res = turnAnti(i,cube.base2[0],cube.base2[1]-(diferenca*i));//colocar o diferencial no vetor ou no resultado???
 		fakeCube.base2[0] = res[0];
-		fakeCube.base2[1] = res[1]-30;
+		fakeCube.base2[1] = res[1];
+		ctx.fillRect(res[0]+cube.cubex,res[1]+cube.cubey,2,2);
 
 	}
 
